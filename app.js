@@ -11,6 +11,25 @@ let board = [
 ];
 
 
+const btnDisable = () => {
+    newGame.disabled = true;
+    newGame.style.opacity = "0.5";
+    newGame.style.cursor = "not-allowed";
+}
+
+
+// Start New Game
+const startNewGame = () => {
+    board = [
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1]
+    ];
+    btnDisable();
+}
+
+
 const generateRandNum = (num) => {
     let number = Math.floor(Math.random() * num);
     return number;
@@ -86,6 +105,7 @@ const putColorsOnBoard = () => {
 
 
 newGame.addEventListener("click", () => {
+    startNewGame();
     putInitialNumber();
     putInitialNumber();
     updateActualBoard();
