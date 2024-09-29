@@ -1,5 +1,6 @@
 let tiles = document.querySelectorAll(".box");
 let newGame = document.querySelector("#new-game");
+let gameOverDiv = document.querySelector("#game-over");
 
 
 // Game Board
@@ -17,6 +18,12 @@ const btnDisable = () => {
     newGame.style.cursor = "not-allowed";
 }
 
+const btnEnable = () => {
+    newGame.disabled = false;
+    newGame.style.opacity = "1";
+    newGame.style.cursor = "pointer";
+}
+
 
 // Start New Game
 const startNewGame = () => {
@@ -27,6 +34,7 @@ const startNewGame = () => {
         [-1, -1, -1, -1]
     ];
     btnDisable();
+    gameOverDiv.style.display = "none";
 }
 
 
@@ -109,7 +117,6 @@ newGame.addEventListener("click", () => {
     putInitialNumber();
     putInitialNumber();
     updateActualBoard();
-    console.log(board);
 })
 
 
@@ -231,7 +238,41 @@ const updateBoard = (key) => {
     if(key === "ArrowDown") {
         updateBoardDown();
     }
-    console.log(board);
+    
+}
+
+
+const checkBoxesAreEqual = () => {
+    let isEqual = false;
+
+    for(let arr of board) {
+        for(let i = 0;i < 3; i++) {
+            if(arr[i] == arr[i + 1]) {
+                isEqual = true;
+            }
+        }
+    }
+
+    for(let c = 0;c < 4; c++) {
+        for(let r = 0;r < 3; r++) {
+            if(board[r][c] == board[r + 1][c]) {
+                isEqual = true;
+            }
+        }
+    }
+
+    return isEqual;
+}
+
+
+const isGameOver = () => {
+    let isEqual = checkBoxesAreEqual();
+    let cnt = countEmptyTiles();
+
+    if(isEqual === false && cnt == 0) {
+        gameOverDiv.style.display = "flex";
+        btnEnable();
+    }
 }
 
 
@@ -239,4 +280,5 @@ document.addEventListener("keydown", (event) => {
     updateBoard(event.key);
     putNewNumber();
     updateActualBoard();
+    isGameOver();
 })

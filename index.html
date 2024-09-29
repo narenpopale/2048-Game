@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2048 Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/utils.css">
 </head>
+
 <body>
     <nav>
         <div class="container">
@@ -15,6 +20,9 @@
         </div>
     </nav>
     <main>
+        <div id="game-over">
+            <h1>Game Over!</h1>
+        </div>
         <div class="game">
             <div class="box"></div>
             <div class="box"></div>
@@ -35,8 +43,10 @@
         </div>
     </main>
     <footer>
-        <p><b>How to play:</b> Use your arrow keys to move the tiles. Tiles with the same number merge into one when they touch. Add them up to reach <b>2048!</b></p>
+        <p><b>How to play:</b> Use your arrow keys to move the tiles. Tiles with the same number merge into one when
+            they touch. Add them up to reach <b>2048!</b></p>
     </footer>
     <script src="app.js"></script>
 </body>
+
 </html>
