@@ -51,9 +51,44 @@ const putNewNumber = () => {
     }
 }
 
+
+// Update Actual Board
+const updateActualBoard = () => {
+    putNumbersOnBoard();
+    putColorsOnBoard();
+}
+
+
+const putNumbersOnBoard = () => {
+    let index = 0;
+    for(let arr of board) {
+        for(let val of arr) {
+            if(val != -1) tiles[index].innerText = val;
+            else tiles[index].innerText = "";
+            index++;
+        }
+    }
+}
+
+
+const putColorsOnBoard = () => {
+    for(let val of tiles) {
+        let num = val.innerText;
+        if(num == 2 || num == 4) val.setAttribute("id", "_24");
+        else if(num !== "") {
+            val.setAttribute("id", `_${num}`)
+        }
+        else {
+            val.removeAttribute("id");
+        }
+    }
+}
+
+
 newGame.addEventListener("click", () => {
     putInitialNumber();
     putInitialNumber();
+    updateActualBoard();
     console.log(board);
 })
 
@@ -177,11 +212,11 @@ const updateBoard = (key) => {
         updateBoardDown();
     }
     console.log(board);
-
 }
 
 
 document.addEventListener("keydown", (event) => {
     updateBoard(event.key);
     putNewNumber();
+    updateActualBoard();
 })
